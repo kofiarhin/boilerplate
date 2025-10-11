@@ -30,6 +30,11 @@ Define how the Codex agent collaborates on this repo, detailing capabilities, wo
   - Coverage must be >= 100%
 - **Security**: No Helmet or Morgan by default
 
+## Clerk Removal
+- All Clerk packages and components were replaced with a local `AuthProvider` stub located at `client/src/auth/auth-context.jsx`.
+- `requireAuth` middleware (`server/middleware/auth.js`) is currently a no-op placeholder that injects a local user.
+- When upgrading auth, migrate to JWT-backed middleware that sets `req.user` from verified tokens and update client context accordingly.
+
 ## Codex Capabilities
 Allowed:
 - Read repo and file structure
@@ -64,12 +69,11 @@ Outputs: Repo Overview, Drift Report, Task Plan
 "scripts": {
   "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
   "dev:server": "nodemon server/server.js",
-  "dev:client": "vite --port 4000",
+  "dev:client": "npm run dev --prefix client",
   "test": "npm run test:server && npm run test:client",
-  "test:server": "jest --coverage --watchAll=false",
-  "test:client": "vitest run --coverage",
-  "build": "npm run build:client",
-  "build:client": "vite build",
+  "test:server": "jest --config server/jest.config.cjs --coverage --runInBand",
+  "test:client": "npm run test --prefix client",
+  "build": "npm run build --prefix client",
   "start": "node server/server.js"
 }
 ```
@@ -85,6 +89,7 @@ Outputs: Repo Overview, Drift Report, Task Plan
 - Per-component SCSS files
 - `hooks/`, `services/`, `styles/`
 - React Query provider configured at root
+- Local AuthContext wraps the application
 
 ## Testing
 - Coverage target: **100%**
