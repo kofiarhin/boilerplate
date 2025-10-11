@@ -1,0 +1,40 @@
+.app-shell {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app-header {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.auth-form {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.auth-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #111827;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.status-message {
+  margin-top: 1.5rem;
+  font-size: 1.125rem;
+}
